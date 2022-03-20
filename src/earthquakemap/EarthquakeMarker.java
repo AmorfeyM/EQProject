@@ -4,7 +4,7 @@ import de.fhpotsdam.unfolding.data.PointFeature;
 import processing.core.PConstants;
 import processing.core.PGraphics;
 
-public abstract class EarthquakeMarker extends CommonMarker
+public abstract class EarthquakeMarker extends CommonMarker implements Comparable<EarthquakeMarker>
 {
 	
 	// Did the earthquake occur on land?
@@ -39,6 +39,14 @@ public abstract class EarthquakeMarker extends CommonMarker
 		properties.put("radius", 2*magnitude );
 		setProperties(properties);
 		this.radius = 1.75f*getMagnitude();
+	}
+	public int compareTo(EarthquakeMarker marker) {
+		if (marker.getMagnitude() < this.getMagnitude())
+	        return -1;
+	    else if (this.getMagnitude() < marker.getMagnitude())
+	        return 1;
+	    else
+	        return 0;
 	}
 
 	@Override

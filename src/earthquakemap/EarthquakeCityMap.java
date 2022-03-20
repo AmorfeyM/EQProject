@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+//Second iteration. Import for getting user request
+import java.util.Scanner;
+import static javax.swing.JOptionPane.*;
+
 import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.data.Feature;
 import de.fhpotsdam.unfolding.data.GeoJSONReader;
@@ -21,7 +25,7 @@ import processing.core.PApplet;
 /** EarthquakeCityMap
  * An application with an interactive map displaying earthquake data.
  * Author: Popov Sergey;
- * */
+ *    */
 public class EarthquakeCityMap extends PApplet {
 	
 
@@ -57,6 +61,12 @@ public class EarthquakeCityMap extends PApplet {
 		
 	private CommonMarker lastSelected;
 	private CommonMarker lastClicked;
+	
+	//Second iteration. My  extension. Needed variables.
+	private Scanner scannerNumOfEarthquake;
+	private String inputDialog, outputDialog;
+	private int numberOfEarthquake;
+	private EarthquakeMarker[] sortedArrayEarthquake;
 	
 	public void setup() {		
 		
@@ -98,7 +108,7 @@ public class EarthquakeCityMap extends PApplet {
 	    }
 
 	    // could be used for debugging
-	    printQuakes();
+	    //printQuakes();
 	 		
 	    // (3) Add markers to map
 	    //     NOTE: Country markers are not added to the map.  They are used
@@ -106,6 +116,21 @@ public class EarthquakeCityMap extends PApplet {
 	    map.addMarkers(quakeMarkers);
 	    map.addMarkers(cityMarkers);
 	    
+	    //Second iteration. Implementation of the extension
+	    
+	    inputDialog = showInputDialog ("Input number of most dengerous earthquake, information about you want to know:");
+	    try {
+	    	numberOfEarthquake = Integer.parseInt (inputDialog);
+	    }
+	    catch (Exception e) {
+	    	//Double check will implements in next iteration
+	    	showMessageDialog(null, "Please, input integer number");
+	    	inputDialog = showInputDialog ("Input number of most dengerous earthquake, information about you want to know:");
+	    	numberOfEarthquake = Integer.parseInt (inputDialog);
+	    }
+	    
+	    sortedArrayEarthquake = sortedListToArray(quakeMarkers);
+	    stringAfterUserRequest(sortedArrayEarthquake, numberOfEarthquake);
 	    
 	}  
 	
@@ -116,6 +141,42 @@ public class EarthquakeCityMap extends PApplet {
 		addKey();
 		
 	}
+	
+	// Second iteration. Just sort.
+	private EarthquakeMarker[] sortedListToArray(List<Marker> unsortedList) {
+		EarthquakeMarker[] arrayQuakeMarkers = quakeMarkers.toArray(new EarthquakeMarker[0]);
+		Arrays.sort(arrayQuakeMarkers);
+		return arrayQuakeMarkers;
+	}
+	
+	// Second iteration. Just print array using user's number. Need for control myself.
+	private void printArray(EarthquakeMarker[] array, int numToPrint) {
+		if (numToPrint <= array.length) {
+			for (int i = 0; i < numToPrint; i++) {
+				System.out.println(array[i]);
+			}
+		}
+		else {
+			for (int i = 0; i < array.length; i++) {
+				System.out.println(array[i]);
+			}
+		}
+	}
+	
+	//NEW. Make result data from array with user's number.
+	private String stringAfterUserRequest(EarthquakeMarker[] sortedArrayEq, int numberOfEarthquake) {
+		if (numberOfEarthquake > sortedArrayEq.length) {
+			numberOfEarthquake = sortedArrayEq.length;
+		}
+					
+		EarthquakeMarker[] userArray = new EarthquakeMarker[numberOfEarthquake];
+		String result = "Check your data:\n";
+		for (int i = 0; i < numberOfEarthquake; i++) {
+			result += sortedArrayEq[i] + "\n";
+		}
+		showMessageDialog(null, result);
+		return result;
+	}	
 	
 	@Override
 	public void mouseMoved()
