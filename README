@@ -1,40 +1,19 @@
-unfolding_app_template and UC San Diego/Coursera MOOC starter code
-==================================================================
+First of all, I want to thank my teachers from University of California San Diego, Computer Science and Engineering school: 
+- Mia Minnes, Teaching Assistant;
+- Leo Porter, Associate Teaching Professor;
+- Christine Alvarado, Associate Teaching Professor.
 
-This is a skeleton to use Unfolding in Eclipse as well as some starter
-code for the Object Oriented Programming in Java course offered by 
-UC San Diego through Coursera.
+This project allows you to see earthquake locations all over the planet on a Google map. Earthquakes are divided into water, land, and urban.
+The annotation on the symbols is given in the upper left part of the screen.
+Also, by hovering the mouse cursor over a specific earthquake, you can see its magnitude and the name of the location where it occurred.
+By clicking the mouse on the earthquake marker, you can see whether it has affected the nearest cities. If not, all markers except the current one will disappear.
+If yes, the marker of the nearest (entering the affected area) city will remain (indicated by a triangle).
+Also in the console you can see information about the number of earthquakes broken down by country.
 
-A very basic Unfolding demo you'll find in the source folder in the default package. 
-For more examples visit http://unfoldingmaps.org, or download the template with
-examples.
-
-The module folders contain the starter code for the programming assignments
-associated with the MOOC.
-
-Get excited and make things!
-
-
-INSTALLATION
-
-Import this folder in Eclipse ('File' -> 'Import' -> 'Existing Projects into
-Workspace', Select this folder, 'Finish')
-
-
-MANUAL INSTALLATION
-
-If the import does not work follow the steps below.
-
-- Create new Java project
-- Copy+Paste all files into project
-- Add all lib/*.jars to build path
-- Set native library location for jogl.jar. Choose appropriate folder for your OS.
-- Add data/ as src
-
-
-TROUBLE SHOOTING
-
-Switch Java Compiler to 1.6 if you get VM problems. (Processing should work with Java 1.6, and 1.7)
+Features used in this project:
+- UnfoldingMaps library: Marker, PointFeature.
+- PApplet;
+- PGraphics.
 
 
 
